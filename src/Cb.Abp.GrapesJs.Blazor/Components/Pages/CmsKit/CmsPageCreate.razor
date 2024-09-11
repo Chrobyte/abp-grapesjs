@@ -1,0 +1,81 @@
+﻿@page "/my-cms-page-create"
+
+@attribute [Authorize(CmsKitAdminPermissions.Pages.Create)]
+
+@using Blazorise.Components
+@using Blazorise.Markdown
+@using Cb.Abp.GrapesJs.Blazor.Components.CmsKit
+@using Microsoft.AspNetCore.Authorization
+@using Volo.Abp.AspNetCore.Components.Web
+@using Volo.Abp.AspNetCore.Components.Web.Theming.Layout
+@using Volo.Abp.BlazoriseUI.Components.ObjectExtending
+@using Volo.CmsKit.Admin.Pages
+@using Volo.CmsKit.Localization
+@using Volo.CmsKit.Permissions
+@using Volo.CmsKit.Admin.Web.Pages.CmsKit
+@using Volo.Abp.DependencyInjection;
+
+
+@inherits GrapesJsComponentBase
+
+
+@inject AbpBlazorMessageLocalizerHelper<CmsKitResource> LH
+
+@* ************************* PAGE HEADER ************************* *@
+<PageHeader Title="@L["Pages"]">
+
+</PageHeader>
+
+<Card>
+    <CardBody>
+        <Form>
+            <Validations @ref="@ValidationsRef" Model="@Page" ValidateOnLoad="false">
+                <Validation MessageLocalizer="@LH.Localize">
+                    <Field>
+                        <FieldLabel>@L["Title"] *</FieldLabel>
+                        <TextEdit @bind-Text="Page.Title" Autofocus="true">
+                            <Feedback>
+                                <ValidationError/>
+                            </Feedback>
+                        </TextEdit>
+                    </Field>
+                </Validation>
+                <Validation MessageLocalizer="@LH.Localize">
+                    <Field>
+                        <FieldLabel>@L["Slug"] *</FieldLabel>
+                        <Tooltip Text="@L["PageSlugInformation"]">
+                            <TextEdit @bind-Text="Page.Slug" Autofocus="false">
+                                <Feedback>
+                                    <ValidationError/>
+                                </Feedback>
+                            </TextEdit>
+                        </Tooltip>
+                    </Field>
+                </Validation>
+                <ExtensionProperties TEntityType="CreatePageInputDto" TResourceType="CmsKitResource" Entity="@Page" LH="@LH" ModalType="ExtensionPropertyModalType.CreateModal" />
+            </Validations>
+            
+            <Tabs @bind-SelectedTab="@SelectedTab">
+                <Items>
+                    <Tab Name="content">@L["Content"]</Tab>
+                    <Tab Name="script">@L["Script"]</Tab>
+                </Items>
+                <Content>
+                    <TabPanel Name="content">
+                        <MyCmsContentBuilderComponent @ref="@ContentBuilder" @bind-Value="@Page.Content" @bind-Css="@Page.Style" />
+                    </TabPanel>
+                    <TabPanel Name="script">
+                        <Markdown @bind-Value="@Page.Script" LineNumbers="true" HideIcons="@HideIcons" AutoDownloadFontAwesome="false" UploadImage="false">
+                            <Toolbar>
+                                <MarkdownToolbarButton Action="MarkdownAction.Bold"/>
+                            </Toolbar>
+                        </Markdown>
+                    </TabPanel>
+                </Content>
+            </Tabs>
+        </Form>
+    </CardBody>
+    <CardFooter>
+         <Button Color="Color.Primary" Clicked="@CreatePageAsync">@L["Submit"]</Button>
+    </CardFooter>
+</Card>

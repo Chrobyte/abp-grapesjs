@@ -34,17 +34,39 @@ public class GrapesJsMenuContributor : IMenuContributor
             )
         );
 
+        context.Menu.Items.Insert(
+            1,
+            new ApplicationMenuItem(
+                GrapesJsMenus.CmsTest.Create,
+                l["Create"],
+                "~/my-cms-page-create",
+                icon: "fas fa-home",
+                order: 0
+            )
+        );
+
+        context.Menu.Items.Insert(
+            2,
+            new ApplicationMenuItem(
+                GrapesJsMenus.CmsTest.Update,
+                l["Update"],
+                "~/my-cms-page-update",
+                icon: "fas fa-home",
+                order: 0
+            )
+        );
+
         if (MultiTenancyConsts.IsEnabled)
         {
-            administration.SetSubItemOrder(TenantManagementMenuNames.GroupName, 1);
+            administration.SetSubItemOrder(TenantManagementMenuNames.GroupName, 3);
         }
         else
         {
             administration.TryRemoveMenuItem(TenantManagementMenuNames.GroupName);
         }
 
-        administration.SetSubItemOrder(IdentityMenuNames.GroupName, 2);
-        administration.SetSubItemOrder(SettingManagementMenus.GroupName, 3);
+        administration.SetSubItemOrder(IdentityMenuNames.GroupName, 4);
+        administration.SetSubItemOrder(SettingManagementMenus.GroupName, 5);
 
         return Task.CompletedTask;
     }
