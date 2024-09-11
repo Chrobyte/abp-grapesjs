@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Volo.CmsKit.EntityFrameworkCore" Version="8.3.0" />
     <ProjectReference Include="..\Cb.Abp.GrapesJs.Domain\Cb.Abp.GrapesJs.Domain.csproj" />
     <PackageReference Include="Volo.Abp.EntityFrameworkCore.SqlServer" Version="8.3.0" />
     <PackageReference Include="Volo.Abp.PermissionManagement.EntityFrameworkCore" Version="8.3.0" />

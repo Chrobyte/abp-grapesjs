@@ -44,6 +44,7 @@ using Volo.Abp.UI;
 using Volo.Abp.UI.Navigation;
 using Volo.Abp.UI.Navigation.Urls;
 using Volo.Abp.VirtualFileSystem;
+using Volo.CmsKit.Web;
 
 namespace Cb.Abp.GrapesJs.Blazor;
 
@@ -61,7 +62,8 @@ namespace Cb.Abp.GrapesJs.Blazor;
     typeof(AbpTenantManagementBlazorServerModule),
     typeof(AbpSettingManagementBlazorServerModule)
    )]
-public class GrapesJsBlazorModule : AbpModule
+[DependsOn(typeof(CmsKitWebModule))]
+    public class GrapesJsBlazorModule : AbpModule
 {
     public override void PreConfigureServices(ServiceConfigurationContext context)
     {
