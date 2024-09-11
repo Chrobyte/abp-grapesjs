@@ -45,6 +45,7 @@ using Volo.Abp.UI.Navigation;
 using Volo.Abp.UI.Navigation.Urls;
 using Volo.Abp.VirtualFileSystem;
 using Volo.CmsKit.Web;
+using Cb.Abp.GrapesJs.Blazor.Bundling;
 
 namespace Cb.Abp.GrapesJs.Blazor;
 
@@ -168,11 +169,19 @@ namespace Cb.Abp.GrapesJs.Blazor;
                 BlazorLeptonXLiteThemeBundles.Styles.Global,
                 bundle =>
                 {
+                    bundle.AddContributors(typeof(GrapesJsStyleContributor));
                     bundle.AddFiles("/blazor-global-styles.css");
                     //You can remove the following line if you don't use Blazor CSS isolation for components
                     bundle.AddFiles(new BundleFile("/Cb.Abp.GrapesJs.Blazor.styles.css", true));
                 }
             );
+
+            options.ScriptBundles.Configure(
+                BlazorLeptonXLiteThemeBundles.Scripts.Global,
+                bundle =>
+                {
+                    bundle.AddContributors(typeof(GrapesJsScriptContributor));
+                });
         });
     }
 
