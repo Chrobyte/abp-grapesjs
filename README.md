@@ -1,5 +1,7 @@
 # Cb.Abp.GrapesJs
 
+repo for this blog post here: https://chrobyte.de/blogs/default/poc-for-abp-cmskit-using-grapesjs
+
 generated using `abp new Cb.Abp.GrapesJs -t app -u blazor-server --theme leptonx-lite`
 
 ## About this solution
